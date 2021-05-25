@@ -1,5 +1,5 @@
 import sys
-sys.path.append('./src/')
+sys.path.append('./src/') # .현재위치 ..상위 위치  # 상대경로 설정
 import numpy as np
 import pandas as pd
 import xml.etree.ElementTree as et

@@ -109,6 +109,6 @@ for i in range(0,len(Voltage1)):
 
 #-----------------------------------------------------------------------------
 
-    plt.savefig('./result_final/{}.png'.format(file_name[i][101:]))
+    plt.savefig('./result/{}.png'.format(file_name[i][101:]))
     plt.clf()
 

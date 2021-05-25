@@ -8,7 +8,7 @@ from numpy import exp,sqrt,pi
 import glob2 as gl
 import warnings
 warnings.simplefilter('ignore',np.RankWarning)
-from input_file import file_name
+from input import file_name
 #반영은 1번밖에 안됨
 
 Voltage1=[]

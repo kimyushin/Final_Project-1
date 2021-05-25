@@ -1,17 +1,14 @@
-from src import parsing_2
-from src import input_file
-
-from src import plottingIV_5
+from src import parsing
+from src import plotting
 import matplotlib as plt
 
-#<해야할일>
-#option_showfig = 'True' or 'False'
-#option_savefig = 'True' or 'False'
-#파일명 processed (1/98) print로
-#github
-#파일명에 숫자없애기
-#doc파일 만들기
-#commit...github
-#pycharm +github...
-#교수님 초대..
-#data file은 .gitignore....
+
+
+#넣어야할것 savefig=true or false ,resultcsv = true or false
+#파일 이름 변경(바로 data밑에)
+#.gitignore
+#사진도 D07,D08..나눠서 저장하게
+#documentation파일을 만들어야함(주피터 노트북)
+#결과 file도 git에 올라가지말게
+#교수님 조직에 초대
+###

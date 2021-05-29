@@ -7,5 +7,5 @@ path = '../data/**/*LMZ*.xml'
 file_name=glob2.glob(path)
 
 
-print(len(file_name))
+#print(len(file_name))
 

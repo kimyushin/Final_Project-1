@@ -9,7 +9,7 @@ from numpy import exp,sqrt,pi
 import glob2 as gl
 import warnings
 warnings.simplefilter('ignore',np.RankWarning)
-from parsing import ref_IL1, ref_L1,L1,L2,L3,L4,L5,L6
+from parsing1 import ref_IL1, ref_L1,L1,L2,L3,L4,L5,L6
 
 #ref 4,5,6차 fitting
 def polyfit(x,y,degree):

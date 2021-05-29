@@ -6,10 +6,11 @@ from numpy import exp,sqrt,pi
 import glob2 as gl
 import warnings
 warnings.simplefilter('ignore',np.RankWarning)
-from parsing import Voltage1,Current1,L1,IL1,L2,IL2,L3,IL3,L4,IL4,L5,IL5,L6,IL6,ref_L1,ref_IL1,WavelengthSweep,s
+from parsing1 import Voltage1,Current1,L1,IL1,L2,IL2,L3,IL3,L4,IL4,L5,IL5,L6,IL6,ref_L1,ref_IL1,s
 from input_file import file_name
+from fittingIV import y_bestfit_list, r_squ_list
 from fitting_ref import p4_list,p5_list,p6_list,rsquared4_list,rsquared5_list,rsquared6_list,p1_list_fit,p2_list_fit,p3_list_fit,p4_list_fit,p5_list_fit,p6_list_fit
-
+import os
 #print(Current1)
 #print(Current1[1],Current1[2],sep='\n')
 #print(len(Voltage1))
@@ -18,14 +19,14 @@ a=0
 
 for i in range(0,len(Voltage1)):
     plt.figure(figsize=(16,10))
-    plt.subplot(2, 3, 4)
-    plt.plot(Voltage1[i],Current1[i],'bo', markersize=5)
-
-    plt.title("IV-analysis", fontsize=15)
-    plt.ylabel('Current[A]')
-    plt.xlabel('Voltage[V]')
-
-    plt.yscale('log')
+    # plt.subplot(2, 3, 4)
+    # plt.plot(Voltage1[i],Current1[i],'bo', markersize=5)
+    #
+    # plt.title("IV-analysis", fontsize=15)
+    # plt.ylabel('Current[A]')
+    # plt.xlabel('Voltage[V]')
+    #
+    # plt.yscale('log')
 
 
 #-----------------------------------------------------------------------4번 i-v law data
@@ -103,12 +104,21 @@ for i in range(0,len(Voltage1)):
    # plt.xlabel('Voltage[V]')
    # plt.yscale('log')
 
+    plt.subplot(2,3,4)
+    plt.plot(Voltage1[i], Current1[i], 'bo', markersize=5)
+    plt.plot(Voltage1[i],y_bestfit_list[i],'r')
+    plt.title("IV-analysis-fitting", fontsize=15)
+    plt.ylabel('Current[A]')
+    plt.xlabel('Voltage[V]')
 
-    #plt.show()
+    plt.yscale('log')
+
+    plt.show()
     print('PROCESSED, {} : {}/{}'.format(file_name[i][101:],a,len(file_name)))
 
 #-----------------------------------------------------------------------------
 
-    plt.savefig('./result/{}.png'.format(file_name[i][101:]))
-    plt.clf()
+    #plt.savefig('./result/{}.png'.format(file_name[i][101:]))
+    plt.close()
+
 

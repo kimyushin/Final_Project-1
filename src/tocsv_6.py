@@ -53,3 +53,11 @@ pd.set_option('display.max_columns',None)
 
 df = pd.DataFrame(data)
 df.to_csv('./result_all.csv')
+
+import os
+os.remove("./text")
+
+os.remove()
+
+import shutil
+shutil.rmtree(".test2")

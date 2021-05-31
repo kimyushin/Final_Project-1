@@ -8,38 +8,40 @@ from lmfit import Model
 import glob2 as gl
 import warnings
 warnings.simplefilter('ignore',np.RankWarning)
-from input_file import file_name
+from input_file import file_name_1
+
 Batch=[]
 Wafer=[]
 Mask=[]
 
-
-
-#----
-data = {'Lot': [],
-        'Wafer': [],
-        'Mask': [],
-        'TestSite': [],
-        'Name': [],
-        'Date': [],
-        'Script ID': [],
-        'Script Version': [],
-        'Script Owner': [],
-        'Operator': [],
-        'Row': [],
-        'Column': [],
-        'ErrorFlag': [],
-        'Error description': [],
-        'Analysis Wavelength': [],
-        'Rsq of Ref.spectrum (6th)': [],
-        'Max trnasmission Ref.spec.(dB)': [],
-        'Rsq of IV': [],
-        'I at -1V': [],
-        'I at 1V': []}
-
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', None)
-df = pd.DataFrame(data)
+df = pd.DataFrame(columns=['Lot', 'Wafer','Mask','TestSite','Name','Date','Script ID','Script Version','Script Owner','Operator','Row','Column','ErrorFlag', 'Error description', 'Analysis Wavelength','Rsq of Ref.spectrum (6th)','Max trnasmission Ref.spec.(dB)'
+                           , 'Rsq of IV','I at -1V','I at 1V'])
+#
+# #----
+# data = {'Lot': [],
+#         'Wafer': [],
+#         'Mask': [],
+#         'TestSite': [],
+#         'Name': [],
+#         'Date': [],
+#         'Script ID': [],
+#         'Script Version': [],
+#         'Script Owner': [],
+#         'Operator': [],
+#         'Row': [],
+#         'Column': [],
+#         'ErrorFlag': [],
+#         'Error description': [],
+#         'Analysis Wavelength': [],
+#         'Rsq of Ref.spectrum (6th)': [],
+#         'Max trnasmission Ref.spec.(dB)': [],
+#         'Rsq of IV': [],
+#         'I at -1V': [],
+#         'I at 1V': []}
+#
+# pd.set_option('display.max_rows', None)
+# pd.set_option('display.max_columns', None)
+# df = pd.DataFrame(data)
 #----
 def polyfit(x, y, degree):
         results = {}
@@ -56,9 +58,9 @@ def polyfit(x, y, degree):
         return results
 
 
-for i in range(0,len(file_name)):
+for i in range(0,len(file_name_1)):
 
-        tree = et.parse(file_name[i])
+        tree = et.parse(file_name_1[i])
         root = tree.getroot()
         ModulatorSite = tree.findall('ElectroOpticalMeasurements/ModulatorSite')
         Modulator = tree.findall('ElectroOpticalMeasurements/ModulatorSite/Modulator')
@@ -121,33 +123,34 @@ for i in range(0,len(file_name)):
                 ErrorFlag = 0
 
         # -----------------------------------------
-        data = {'Lot': TestSiteInfo['Batch'],
-                'Wafer': TestSiteInfo['Wafer'],
-                'Mask': TestSiteInfo['Maskset'],
-                'TestSite': TestSiteInfo['TestSite'],
-                'Name': Modulator[0].attrib['Name'],
-                'Date': PortCombo[0].attrib['DateStamp'],
-                'Script ID': 'process LMZ',
-                'Script Version': '0.1',
-                'Script Owner': 'B2',
-                'Operator': ModulatorSite[0].attrib['Operator'],
-                'Row': TestSiteInfo['DieRow'],
-                'Column': TestSiteInfo['DieColumn'],
-                'ErrorFlag': ErrorFlag,
-                'Error description': Error,
-                'Analysis Wavelength': DesignParameter[1].text,
-                'Rsq of Ref.spectrum (6th)': polyfit(x, y, 6)['determination'],
-                'Max trnasmission Ref.spec.(dB)': max(p6(x)),
-                'Rsq of IV': results,
-                'I at -1V': poly1dIV_list[4],
-                'I at 1V': best_f[12]}
+        # data_real = {'Lot': TestSiteInfo['Batch'],
+        #         'Wafer': TestSiteInfo['Wafer'],
+        #         'Mask': TestSiteInfo['Maskset'],
+        #         'TestSite': TestSiteInfo['TestSite'],
+        #         'Name': Modulator[0].attrib['Name'],
+        #         'Date': PortCombo[0].attrib['DateStamp'],
+        #         'Script ID': 'process LMZ',
+        #         'Script Version': '0.1',
+        #         'Script Owner': 'B2',
+        #         'Operator': ModulatorSite[0].attrib['Operator'],
+        #         'Row': TestSiteInfo['DieRow'],
+        #         'Column': TestSiteInfo['DieColumn'],
+        #         'ErrorFlag': ErrorFlag,
+        #         'Error description': Error,
+        #         'Analysis Wavelength': DesignParameter[1].text,
+        #         'Rsq of Ref.spectrum (6th)': polyfit(x, y, 6)['determination'],
+        #         'Max trnasmission Ref.spec.(dB)': max(p6(x)),
+        #         'Rsq of IV': results,
+        #         'I at -1V': poly1dIV_list[4],
+        #         'I at 1V': best_f[12]}
+        df = df.append(pd.DataFrame([[TestSiteInfo['Batch'],TestSiteInfo['Wafer'],TestSiteInfo['Maskset'],TestSiteInfo['TestSite'],Modulator[0].attrib['Name']
+                                      ,PortCombo[0].attrib['DateStamp'],'process LMZ','0.1','B2',
+                                     ModulatorSite[0].attrib['Operator'],TestSiteInfo['DieRow'], TestSiteInfo['DieColumn'],ErrorFlag,Error, DesignParameter[1].text,
+                                      polyfit(x, y, 6)['determination'],max(p6(x)),results,poly1dIV_list[4],best_f[12]]],
+                                    columns=['Lot', 'Wafer','Mask','TestSite','Name',
+                                             'Date','Script ID','Script Version','Script Owner',
+                                             'Operator','Row','Column','ErrorFlag', 'Error description', 'Analysis Wavelength','Rsq of Ref.spectrum (6th)','Max trnasmission Ref.spec.(dB)', 'Rsq of IV','I at -1V','I at 1V']), ignore_index=True)
 
-        pd.set_option('display.max_rows', None)
-        pd.set_option('display.max_columns', None)
-
-        dfs = df.append(data, ignore_index=True)
-
-
-        dfs.to_csv('./result.csv')
+df.to_csv('./result.csv')
 
 

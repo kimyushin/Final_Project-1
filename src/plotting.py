@@ -9,6 +9,8 @@ warnings.simplefilter('ignore',np.RankWarning)
 from parsing1 import Voltage1,Current1,L1,IL1,L2,IL2,L3,IL3,L4,IL4,L5,IL5,L6,IL6,ref_L1,ref_IL1,s
 from input_file import file_name
 from fittingIV import y_bestfit_list, r_squ_list
+import os
+import glob2
 from fitting_ref import p4_list,p5_list,p6_list,rsquared4_list,rsquared5_list,rsquared6_list,p1_list_fit,p2_list_fit,p3_list_fit,p4_list_fit,p5_list_fit,p6_list_fit
 import os
 #print(Current1)
@@ -117,6 +119,8 @@ for i in range(0,len(Voltage1)):
     print('PROCESSED, {} : {}/{}'.format(file_name[i][101:],a,len(file_name)))
 
 #-----------------------------------------------------------------------------
+    #pngfile = './result/*.png'
+    #[os.remove(f) for f in glob2.glob(pngfile)]
 
     #plt.savefig('./result/{}.png'.format(file_name[i][101:]))
     plt.close()

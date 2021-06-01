@@ -3,13 +3,19 @@ import time
 
 start = time.time()  # 시작 시간 저장
 
+
 import input
+
 from src import input_file
+
+from src import removefolder
+
 from src import parsing
-from src import remove
-from src import makedoc
+
+
+from src import makefolder
 from src import plotting
-from src import line_
+from src import makecsv
 
 
 

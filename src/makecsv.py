@@ -8,7 +8,7 @@ from lmfit import Model
 import glob2 as gl
 import warnings
 warnings.simplefilter('ignore',np.RankWarning)
-from input_file import file_name_1
+from input_file import file_name
 
 Batch=[]
 Wafer=[]
@@ -58,9 +58,9 @@ def polyfit(x, y, degree):
         return results
 
 
-for i in range(0,len(file_name_1)):
+for i in range(0,len(file_name)):
 
-        tree = et.parse(file_name_1[i])
+        tree = et.parse(file_name[i])
         root = tree.getroot()
         ModulatorSite = tree.findall('ElectroOpticalMeasurements/ModulatorSite')
         Modulator = tree.findall('ElectroOpticalMeasurements/ModulatorSite/Modulator')
@@ -151,6 +151,6 @@ for i in range(0,len(file_name_1)):
                                              'Date','Script ID','Script Version','Script Owner',
                                              'Operator','Row','Column','ErrorFlag', 'Error description', 'Analysis Wavelength','Rsq of Ref.spectrum (6th)','Max trnasmission Ref.spec.(dB)', 'Rsq of IV','I at -1V','I at 1V']), ignore_index=True)
 
-df.to_csv('./result/result.csv')
+df.to_csv('./result/csv/result.csv')
 
 

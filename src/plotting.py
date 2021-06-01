@@ -11,8 +11,8 @@ from input_file import file_name
 from fittingIV import y_bestfit_list, r_squ_list
 import os
 import glob2
-from fitting_ref import p4_list,p5_list,p6_list,rsquared4_list,rsquared5_list,rsquared6_list,p1_list_fit,p2_list_fit,p3_list_fit,p4_list_fit,p5_list_fit,p6_list_fit
-from input import option,savefig
+from fittingRef import p4_list,p5_list,p6_list,rsquared4_list,rsquared5_list,rsquared6_list,p1_list_fit,p2_list_fit,p3_list_fit,p4_list_fit,p5_list_fit,p6_list_fit
+from input import showfig,savefig
 import os
 from tqdm import tqdm
 #print(Current1)
@@ -119,9 +119,9 @@ for i in range(0, len(Voltage1)):
         #plt.savefig('./result/{}.png'.format(file_name[i][101:]))
 
 
-    if option=='TRUE' :
+    if showfig=='TRUE' :
         plt.show()
-    else: print('NO SHOW')
+    #else: print('NO SHOW')
 
 
     if savefig=='TRUE' :

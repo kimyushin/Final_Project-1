@@ -151,6 +151,6 @@ for i in range(0,len(file_name_1)):
                                              'Date','Script ID','Script Version','Script Owner',
                                              'Operator','Row','Column','ErrorFlag', 'Error description', 'Analysis Wavelength','Rsq of Ref.spectrum (6th)','Max trnasmission Ref.spec.(dB)', 'Rsq of IV','I at -1V','I at 1V']), ignore_index=True)
 
-df.to_csv('./result.csv')
+df.to_csv('./result/result.csv')
 
 

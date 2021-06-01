@@ -32,6 +32,7 @@ x_cut_list=[]
 y_cut_list=[]
 s = []
 for i in file_name:
+
     tree=et.parse(i)
     root = tree.getroot()
 
@@ -126,3 +127,5 @@ for i in file_name:
 #print(file_name[1][101:120])
 
 #print(ref_L1[0])
+
+

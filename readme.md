@@ -8,8 +8,6 @@ Hi, we are hanyang university at ansan, B-2 engineering for programming.
 #Contact mail  
  If there is an error that cannot be solved about the code, please contact 000@hanyang.ac.kr.  
  
- #주의 사항  
- 추가예정 
 
 
 ```python

@@ -8,5 +8,4 @@ path = './data/**/*LMZ*.xml'
 file_name=glob2.glob(path)
 
 file_name_1=glob2.glob('../data/**/*LMZ*.xml')
-#print(len(file_name))
-
+#print(file_name_1)
